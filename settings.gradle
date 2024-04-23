@@ -1,1 +1,19 @@
+pluginManagement {
+    repositories {
+        maven {
+            url = uri('https://maven.pkg.github.com/neverendingsupport/spring-boot')
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+        gradlePluginPortal()
+    }
+    resolutionStrategy.eachPlugin {
+        if (requested.id.id.startsWith('com.herodevs.nes.springframework.boot')) {
+            useModule("com.herodevs.nes.springframework.boot:spring-boot-gradle-plugin:${requested.version}")
+        }
+    }
+}
+
 rootProject.name = 'realworld-spring-boot-java'
