@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users
 (
-    id       BIGSERIAL PRIMARY KEY,
+    id       SERIAL PRIMARY KEY,
     name     VARCHAR(100) NOT NULL,
     bio      VARCHAR(1024),
     image    VARCHAR(1024),
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS user_followings
 
 CREATE TABLE IF NOT EXISTS articles
 (
-    id          BIGSERIAL PRIMARY KEY,
+    id          SERIAL PRIMARY KEY,
     author_id   BIGINT       NOT NULL,
     title       VARCHAR(255) NOT NULL,
     slug        VARCHAR(255) NOT NULL,
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS articles
 
 CREATE TABLE IF NOT EXISTS tags
 (
-    id    BIGSERIAL PRIMARY KEY,
-    value VARCHAR(255) UNIQUE NOT NULL
+    id    SERIAL PRIMARY KEY,
+    `value` VARCHAR(255) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS articles_tags
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS article_favorites
 
 CREATE TABLE IF NOT EXISTS comments
 (
-    id          BIGSERIAL PRIMARY KEY,
+    id          SERIAL PRIMARY KEY,
     author_id   BIGINT       NOT NULL,
     article_id  BIGINT       NOT NULL,
     body        VARCHAR      NOT NULL,

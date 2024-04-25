@@ -1,6 +1,7 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.2'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.herodevs.nes.springframework.boot' version '0.0.56'
+//    id 'org.springframework.boot' version '2.7.18'
+//    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'jacoco'
     id "io.freefair.lombok" version "5.3.3.3"
@@ -14,19 +15,63 @@ version = '2.1.1'
 sourceCompatibility = '11'
 
 repositories {
+    mavenLocal()
     mavenCentral()
+//    maven { url 'https://mvnrepository.com/artifact/org.hibernate.dialect/sqlite-dialect'}
+//    maven {
+//        url 'https://maven.pkg.github.com/neverendingsupport/spring-boot'
+//        credentials {
+//            username = System.getenv("GITHUB_USER")
+//            password = System.getenv("GITHUB_TOKEN")
+//        }
+//    }
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//configurations.all {
+//    resolutionStrategy.eachDependency { details ->
+//        println "****--------------------------------------****"
+//        if (details.requested.group == 'com.herodevs.nes.springframework.boot') {
+//            details.useVersion('desired-version')
+//            details.useTarget('org.springframework.boot:spring-boot-gradle-plugin:desired-version')  // Use this line only if changing to a different artifact
+//        }
+//    }
+//}
 
-    runtimeOnly 'com.h2database:h2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+dependencies {
+////    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-web:0.0.56'
+    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-security:0.0.56'
+    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-validation:0.0.56'
+    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-data-jpa:0.0.56'
+
+    implementation 'com.enigmabridge:hibernate4-sqlite-dialect:0.1.2'
+
+    // HIBERNATE 6
+//    implementation 'org.hibernate.orm:hibernate-community-dialects:6.4.1.Final'
+
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'io.rest-assured:rest-assured:4.5.1'
+    testImplementation 'io.rest-assured:json-path:4.5.1'
+    testImplementation 'io.rest-assured:xml-path:4.5.1'
+
+//    implementation 'com.h2database:h2:2.2.224'
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
+
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-test:0.0.56'
+    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-test:0.0.56'
+    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-test-autoconfigure:0.0.56'
+//    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-test:2.7.18-spring-boot-2.7.19g'
+//    testImplementation 'com.herodevs.nes.springframework.security:spring-security-test:0.0.56'
+    testImplementation 'org.springframework.security:spring-security-test:5.7.11'
     testImplementation 'org.mockito:mockito-inline:3.12.1'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
+
+
 }
 
 apply from: 'test.gradle'
@@ -45,7 +90,7 @@ sonarqube {
 
 jib {
     from {
-        image = "openjdk:11.0.10-jre-buster"
+//        image = "openjdk:11.0.10-jre-buster"
         platforms {
             platform {
                 architecture = 'amd64'
