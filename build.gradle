@@ -1,5 +1,5 @@
 plugins {
-    id 'com.herodevs.nes.springframework.boot' version '0.0.56'
+    id 'com.herodevs.nes.springframework.boot' version '0.0.59'
 //    id 'org.springframework.boot' version '2.7.18'
 //    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
@@ -9,6 +9,11 @@ plugins {
     id "org.sonarqube" version "3.1.1"
     id 'com.google.cloud.tools.jib' version '3.1.4'
 }
+
+ext {
+    NES_BOOT_VERSION = '0.0.59'
+}
+
 
 group = 'io.github.raeperd'
 version = '2.1.1'
@@ -38,11 +43,12 @@ repositories {
 //}
 
 dependencies {
+
 ////    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-web:0.0.56'
-    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-security:0.0.56'
-    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-validation:0.0.56'
-    implementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-data-jpa:0.0.56'
+    implementation "com.herodevs.nes.springframework.boot:spring-boot-starter-web:${NES_BOOT_VERSION}"
+    implementation "com.herodevs.nes.springframework.boot:spring-boot-starter-security:${NES_BOOT_VERSION}"
+    implementation "com.herodevs.nes.springframework.boot:spring-boot-starter-validation:${NES_BOOT_VERSION}"
+    implementation "com.herodevs.nes.springframework.boot:spring-boot-starter-data-jpa:${NES_BOOT_VERSION}"
 
     implementation 'com.enigmabridge:hibernate4-sqlite-dialect:0.1.2'
 
@@ -61,17 +67,14 @@ dependencies {
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
 
 //    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-test:0.0.56'
-    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-test:0.0.56'
-    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-test-autoconfigure:0.0.56'
+    testImplementation "com.herodevs.nes.springframework.boot:spring-boot-test:${NES_BOOT_VERSION}"
+    testImplementation "com.herodevs.nes.springframework.boot:spring-boot-starter-test:${NES_BOOT_VERSION}"
+    testImplementation "com.herodevs.nes.springframework.boot:spring-boot-test-autoconfigure:${NES_BOOT_VERSION}"
 //    testImplementation 'com.herodevs.nes.springframework.boot:spring-boot-starter-test:2.7.18-spring-boot-2.7.19g'
 //    testImplementation 'com.herodevs.nes.springframework.security:spring-security-test:0.0.56'
     testImplementation 'org.springframework.security:spring-security-test:5.7.11'
     testImplementation 'org.mockito:mockito-inline:3.12.1'
     testImplementation 'org.hamcrest:hamcrest:2.2'
-
-
-
 }
 
 apply from: 'test.gradle'
