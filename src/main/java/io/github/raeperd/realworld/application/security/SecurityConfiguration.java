@@ -1,6 +1,7 @@
 package io.github.raeperd.realworld.application.security;
 
 import io.github.raeperd.realworld.domain.jwt.JWTDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -20,9 +21,10 @@ import java.util.List;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
-@EnableConfigurationProperties(SecurityConfigurationProperties.class)
+@EnableConfigurationProperties(SecurityConfiguration.SecurityConfigurationProperties.class)
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+public class SecurityConfiguration implements WebMvcConfigurer {
+//public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private final SecurityConfigurationProperties properties;
 
@@ -30,24 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
         this.properties = properties;
     }
 
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(POST, "/users", "/users/login");
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.cors();
-        http.formLogin().disable();
-        http.logout().disable();
-        http.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.authorizeRequests()
-                .antMatchers(GET, "/profiles/*").permitAll()
-                .antMatchers(GET, "/articles/**").permitAll()
-                .antMatchers(GET, "/tags/**").permitAll()
-                .anyRequest().authenticated();
-    }
 
     @Bean
     JWTAuthenticationProvider jwtAuthenticationProvider(JWTDeserializer jwtDeserializer) {
@@ -67,18 +51,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
-}
 
-@ConstructorBinding
-@ConfigurationProperties("security")
-class SecurityConfigurationProperties {
-    private final List<String> allowedOrigins;
 
-    SecurityConfigurationProperties(List<String> allowedOrigins) {
-        this.allowedOrigins = allowedOrigins;
-    }
+    @ConstructorBinding
+    @ConfigurationProperties("security")
+    public static class SecurityConfigurationProperties {
+        private final List<String> allowedOrigins;
 
-    public List<String> getAllowedOrigins() {
-        return allowedOrigins;
+        SecurityConfigurationProperties(List<String> allowedOrigins) {
+            this.allowedOrigins = allowedOrigins;
+        }
+
+        public List<String> getAllowedOrigins() {
+            return allowedOrigins;
+        }
     }
 }
