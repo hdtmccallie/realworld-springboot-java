@@ -1,5 +1,5 @@
 plugins {
-    id 'com.herodevs.nes.springframework.boot' version '0.0.59'
+    id 'com.herodevs.nes.springframework.boot' version '2.7.18-spring-boot-2.7.19-rc4'
 //    id 'org.springframework.boot' version '2.7.18'
 //    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
@@ -11,7 +11,7 @@ plugins {
 }
 
 ext {
-    NES_BOOT_VERSION = '0.0.59'
+    NES_BOOT_VERSION = '2.7.18-spring-boot-2.7.19-rc4'
 }
 
 
@@ -20,16 +20,16 @@ version = '2.1.1'
 sourceCompatibility = '11'
 
 repositories {
-    mavenLocal()
-    mavenCentral()
+//    mavenLocal()
 //    maven { url 'https://mvnrepository.com/artifact/org.hibernate.dialect/sqlite-dialect'}
-//    maven {
-//        url 'https://maven.pkg.github.com/neverendingsupport/spring-boot'
-//        credentials {
-//            username = System.getenv("GITHUB_USER")
-//            password = System.getenv("GITHUB_TOKEN")
-//        }
-//    }
+    maven {
+        url 'https://maven.pkg.github.com/neverendingsupport/spring-boot'
+        credentials {
+            username = "zz" // username can be blank
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
+    mavenCentral()
 }
 
 //configurations.all {
