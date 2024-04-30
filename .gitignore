@@ -35,5 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### Project specifics
 .envrc
 *.sqlite.db
+node_modules

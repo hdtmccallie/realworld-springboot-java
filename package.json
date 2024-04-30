@@ -1,0 +1,16 @@
+{
+  "name": "spring-boot-realworld-java",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "build": "./gradlew build",
+    "clean": "./gradlew clean build --refresh-dependencies"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
