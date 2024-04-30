@@ -1,13 +1,19 @@
 pluginManagement {
     repositories {
+//        maven {
+//            url 'https://maven.pkg.github.com/neverendingsupport/spring-boot'
+//            credentials {
+//                username = "" // username can be blank
+//                password = System.getenv("GITHUB_TOKEN")
+//            }
+//        }
         maven {
-            url 'https://maven.pkg.github.com/neverendingsupport/spring-boot'
+            url 'http://localhost:3010/maven/'
             credentials {
-                username = "" // username can be blank
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("NES_USERNAME")
+                password = System.getenv("NES_ACCESS_TOKEN")
             }
         }
-//        mavenLocal()
         gradlePluginPortal()
         mavenCentral()
     }

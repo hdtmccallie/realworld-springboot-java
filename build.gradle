@@ -22,13 +22,23 @@ sourceCompatibility = '11'
 repositories {
 //    mavenLocal()
 //    maven { url 'https://mvnrepository.com/artifact/org.hibernate.dialect/sqlite-dialect'}
+//    maven {
+//        url 'https://maven.pkg.github.com/neverendingsupport/spring-boot'
+//        credentials {
+//            username = "zz" // username can be blank
+//            password = System.getenv("GITHUB_TOKEN")
+//        }
+//    }
+
     maven {
-        url 'https://maven.pkg.github.com/neverendingsupport/spring-boot'
+        url 'http://localhost:3010/maven/'
         credentials {
-            username = "zz" // username can be blank
-            password = System.getenv("GITHUB_TOKEN")
+            username = System.getenv("NES_USERNAME")
+            password = System.getenv("NES_ACCESS_TOKEN")
         }
     }
+    maven { url 'https://mvnrepository.com/artifact/org.hibernate.dialect/sqlite-dialect'}
+
     mavenCentral()
 }
 

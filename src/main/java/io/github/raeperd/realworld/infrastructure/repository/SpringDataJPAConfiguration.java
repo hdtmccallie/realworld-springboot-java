@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -37,9 +38,12 @@ class SpringDataJPAConfiguration  {
     }
 
     @Bean
-    public InitializingBean postInstall(ResourceDatabasePopulator populator, DataSource dataSource){
+    public InitializingBean postInstall(ResourceDatabasePopulator populator, JdbcTemplate jdbc, DataSource dataSource){
         return () -> {
-            populator.populate(dataSource.getConnection());
+            var results = jdbc.query("SELECT name FROM sqlite_master WHERE type='table';", (rs, rowNum) -> rs.getString("name"));
+            if( !results.contains("articles") ){
+                populator.populate(dataSource.getConnection());
+            }
         };
     }
 }
