@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "./gradlew build",
+    "clean:run": "./gradlew clean bootRun --refresh-dependencies --info",
     "clean": "./gradlew clean build --refresh-dependencies"
   },
   "keywords": [],
